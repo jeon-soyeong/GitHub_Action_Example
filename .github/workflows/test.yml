@@ -1,0 +1,24 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Run Test
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Xcode
+      run: |
+        xcodebuild clean test -project GitHub_Action_Example.xcodeproj \
+        -scheme GitHub_Action_Example \
+        -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest'
+
